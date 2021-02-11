@@ -29,7 +29,8 @@ namespace TailSpin.SpaceGame.Web.Controllers
             int page = 1, 
             int pageSize = 10, 
             string mode = "",
-            string region = ""
+            string region = "",
+            string style = ""
             )
         {
             // Create the view model with initial values we already know.
@@ -65,7 +66,8 @@ namespace TailSpin.SpaceGame.Web.Controllers
                 // Select the score if the game mode or region is empty.
                 Expression<Func<Score, bool>> queryPredicate = score =>
                     (string.IsNullOrEmpty(mode) || score.GameMode == mode) &&
-                    (string.IsNullOrEmpty(region) || score.GameRegion == region);
+                    (string.IsNullOrEmpty(region) || score.GameRegion == region) &&
+                    (string.IsNullOrEmpty(style) || score.GameStyle == style);
 
                 // Fetch the total number of results in the background.
                 var countItemsTask = _scoreRepository.CountItemsAsync(queryPredicate);
